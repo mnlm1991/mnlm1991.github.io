@@ -4,7 +4,7 @@
   <title><![CDATA[Category: shell | mnlm1991 Blog]]></title>
   <link href="http://mnlm1991.github.io/blog/categories/shell/atom.xml" rel="self"/>
   <link href="http://mnlm1991.github.io/"/>
-  <updated>2015-07-26T14:57:14+08:00</updated>
+  <updated>2015-07-26T16:33:21+08:00</updated>
   <id>http://mnlm1991.github.io/</id>
   <author>
     <name><![CDATA[mnlm1991]]></name>
@@ -39,6 +39,8 @@ if list; then list; [elif list ; then list; ] ... [ else list; ] fi
 if 后面的list执行，如果返回值为0，则执行then后面的list，否则会执行elif后面的list，直到有一个list的执行结果为0，则执行对应的then后面的list，如果所有elif的执行结果都是非0，则会执行else的后面的list。</p>
 
 <p>这里需要说明一下if后面并不是只能接条件语句，可以接任何的命令，最终是判断这一串语句的返回值是不是0</p>
+
+<!-- more -->
 
 <h3 id="for">for</h3>
 
