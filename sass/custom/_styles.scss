@@ -1,2 +1,27 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
+#markdown-toc:before {
+  content: "Table of Contents";
+  font-weight: bold;
+}
+ul#markdown-toc {
+  list-style: none;
+  float: right;
+  background-color: #d3d3d3;
+  border: medium none;
+  border-radius: 8px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+  font-size: 1em;
+  font-style: normal;
+  line-height: 1.75em;
+  list-style: outside none none;
+  margin-bottom: 1.25em;
+  margin-left: 1.25em;
+  margin-top: 0.25em;
+  padding: 1.25em 1.2em 1.2em;
+}
+
+.blog-index #markdown-toc {
+  display: none;
+}
+
