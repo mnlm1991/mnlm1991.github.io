@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: shell | mnlm1991 Blog]]></title>
+  <link href="http://mnlm1991.github.io/blog/categories/shell/atom.xml" rel="self"/>
+  <link href="http://mnlm1991.github.io/"/>
+  <updated>2015-07-26T14:57:14+08:00</updated>
+  <id>http://mnlm1991.github.io/</id>
+  <author>
+    <name><![CDATA[mnlm1991]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[shell 用法总结]]></title>
+    <link href="http://mnlm1991.github.io/blog/2015/07/26/shell-yong-fa-zong-jie/"/>
+    <updated>2015-07-26T12:44:39+08:00</updated>
+    <id>http://mnlm1991.github.io/blog/2015/07/26/shell-yong-fa-zong-jie</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">控制语句</a>    <ul>
+      <li><a href="#if" id="markdown-toc-if">if</a></li>
+      <li><a href="#for" id="markdown-toc-for">for</a></li>
+      <li><a href="#while" id="markdown-toc-while">while</a></li>
+      <li><a href="#case" id="markdown-toc-case">case</a></li>
+      <li><a href="#select" id="markdown-toc-select">select</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section">控制语句</h2>
+
+<h3 id="if">if</h3>
+
+<p><code>sh 
+if list; then list; [elif list ; then list; ] ... [ else list; ] fi
+</code>
+if 后面的list执行，如果返回值为0，则执行then后面的list，否则会执行elif后面的list，直到有一个list的执行结果为0，则执行对应的then后面的list，如果所有elif的执行结果都是非0，则会执行else的后面的list。</p>
+
+<p>这里需要说明一下if后面并不是只能接条件语句，可以接任何的命令，最终是判断这一串语句的返回值是不是0</p>
+
+<h3 id="for">for</h3>
+
+<p>for 有两种格式
+<code>sh
+for name [ [ in [ word ... ] ] ; ] do list ; done
+</code>
+name的值会遍历word列表，并执行list</p>
+
+<p>用法举例1：
+<code>sh
+for i in {1..3}
+do
+    echo $i
+done
+</code>
+output:</p>
+
+<pre><code>1
+2
+3
+</code></pre>
+
+<p>说明{1..3}会生成”1 2 3”的一个列表</p>
+
+<p>用法举例2：
+<code>sh
+for host in 70 72 110
+do
+    ssh 192.168.10.$host "grep 'xxx' /data/logs/xxxx"
+done
+</code>
+分别从三台机器上查看日志</p>
+
+<p><code>sh
+for (( expr1 ; expr2 ; expr3 )) ; do list ; done
+</code>
+语法和c语言的一样只是是两个括号
+<code>sh
+for (( i = 1; i &lt; 10; i += 2 ))
+do
+    echo $i
+done
+</code>
+output:</p>
+
+<pre><code>1
+3
+5
+7
+9
+</code></pre>
+
+<h3 id="while">while</h3>
+
+<p><code>sh
+while list; do list; done
+until list; do list; done
+</code>
+while 只要 while后面的list执行返回值为0，则会执行do后面的list, until与while相反</p>
+
+<p>用法举例：
+<code>sh
+while read line
+do
+    echo $line
+done
+</code>
+从标准输入依次读取一行直到标准输入结束</p>
+
+<h3 id="case">case</h3>
+
+<p><code>sh
+case word in [ [(] pattern [ | pattern ] ... ) list ;; ] ... esac
+</code>
+word匹配到对应的正则会执行对应的list语句</p>
+
+<p>举例：
+<code>sh
+case $1 in 
+    start | begin )
+        echo "start"
+        ;;
+    stop | end )
+        echo "stop"
+        ;;
+    *)
+        echo "default"
+        ;;
+esac
+</code>
+处理脚本的参数</p>
+
+<h3 id="select">select</h3>
+
+<p><code>sh
+select name [ in word ] ; do list ; done
+</code>
+多用于用户交互，给一个列表参数供选择，select是循环选择，需要在list里面写break退出循环，多与case配合使用</p>
+
+<p><code>sh
+select word in start stop exit
+do
+    case $word in
+        exit)
+            exit 0
+            ;;
+        *)
+            echo $word
+            ;;
+    esac
+done
+</code>
+执行过程：</p>
+
+<p><img src="/downloads/image/shell-select.png" alt="shell-select" /></p>
+
+]]></content>
+  </entry>
+  
+</feed>
